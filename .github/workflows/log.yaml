@@ -1,20 +1,19 @@
 name: Test Log
 
 on:
-	push:
-		branches: [ main ]
-	pull_request:
-		branches: [ main ]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-	log:
-		runs-on: ubuntu-latest
-		steps:
+  log:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v4
-      
-			- name: Simple log
-				run: |
-					echo "Trigger: ${{ github.event_name }}"
-					echo "Ref: ${{ github.ref }}"
-					echo "Actor: ${{ github.actor }}"
 
+      - name: Simple log
+        run: |
+          echo "Trigger: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Actor: ${{ github.actor }}"
