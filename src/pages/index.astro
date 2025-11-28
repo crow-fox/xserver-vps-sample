@@ -1,9 +1,13 @@
 ---
+import { nanoid } from 'nanoid';
 import Layout from '../layouts/Layout.astro';
+
+const buildId = nanoid(12)
 ---
 
 <Layout>
 	<h1>
 		XServer VPS に Github Actions 経由でデプロイするサンプルサイト
 	</h1>
+	<p>Build ID: {buildId}</p>
 </Layout>
