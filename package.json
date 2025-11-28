@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.1",
-    "nanoid": "^5.1.6"
+    "astro": "^5.16.1"
   }
 }

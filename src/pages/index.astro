@@ -1,13 +1,21 @@
 ---
-import { nanoid } from 'nanoid';
 import Layout from '../layouts/Layout.astro';
 
-const buildId = nanoid(12)
+// 日本時間にformat
+const jpBuildDate = new Date().toLocaleString('ja-JP', {
+	timeZone: 'Asia/Tokyo',
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+	hour: '2-digit',
+	minute: '2-digit',
+	second: '2-digit',
+});
 ---
 
 <Layout>
 	<h1>
 		XServer VPS に Github Actions 経由でデプロイするサンプルサイト
 	</h1>
-	<p>Build ID: {buildId}</p>
+	<p>ビルド日時: {jpBuildDate}</p>
 </Layout>
