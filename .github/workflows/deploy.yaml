@@ -28,7 +28,27 @@ jobs:
       - name: Build project
         run: pnpm build
 
-      - name: Deploy to VPS
-        # ここに実際にSSHを使ったデプロイコマンドを追加します
+      # SSH 準備
+      - name: Prepare SSH
         run: |
-          echo "Deploying to VPS..."
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          # ホスト鍵登録（ホスト名とポートも Secrets から）
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      # rsync デプロイ
+      - name: Deploy via rsync to XServer VPS
+        env:
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          REMOTE_DIR: ${{ secrets.SSH_REMOTE_DIR }}
+        run: |
+          LOCAL_DIR=./dist/
+
+          rsync -az --delete \
+            -e "ssh -p ${REMOTE_PORT} -i ~/.ssh/id_rsa -o StrictHostKeyChecking=yes" \
+            "${LOCAL_DIR}" \
+            "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
