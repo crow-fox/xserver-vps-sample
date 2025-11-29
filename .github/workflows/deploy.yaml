@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false # キャンセルせず「待ち行列」にする
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
