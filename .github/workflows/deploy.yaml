@@ -28,13 +28,6 @@ jobs:
       - name: Build project
         run: pnpm build
 
-      - name: Debug secrets
-        run: |
-          echo "SSH_HOST: ${{ secrets.SSH_HOST }}"
-          echo "SSH_USER: ${{ secrets.SSH_USER }}"
-          echo "SSH_PORT: ${{ secrets.SSH_PORT }}"
-          echo "SSH_REMOTE_DIR: ${{ secrets.SSH_REMOTE_DIR }}"
-
       # SSH 準備
       - name: Prepare SSH
         run: |
