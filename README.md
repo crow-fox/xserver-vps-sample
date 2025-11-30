@@ -54,3 +54,20 @@ nginx デフォルトの公開ディレクトリ作成
 ```bash
 mkdir -p /var/www/html
 ```
+
+github actions の変数設定
+
+secrets に以下を登録
+
+| Name            | Value                        |
+| --------------- | ---------------------------- |
+| SSH_PRIVATE_KEY | ダウンロードした秘密鍵の中身 |
+
+variables に以下を登録
+
+| Name           | Value                   |
+| -------------- | ----------------------- |
+| SSH_USER       | root                    |
+| SSH_HOST       | <your-vps-標準ホスト名> |
+| SSH_PORT       | 22                      |
+| SSH_REMOTE_DIR | /var/www/html           |
