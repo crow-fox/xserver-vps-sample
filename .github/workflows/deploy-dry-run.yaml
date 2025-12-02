@@ -53,7 +53,7 @@ jobs:
         run: |
           LOCAL_DIR=./dist/
 
-          rsync -azn --delete \
+          rsync -aznv --delete --itemize-changes \
             -e "ssh -p ${REMOTE_PORT} -i ~/.ssh/id_rsa -o StrictHostKeyChecking=yes" \
             "${LOCAL_DIR}" \
             "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}"
